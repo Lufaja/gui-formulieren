@@ -62,6 +62,7 @@ def checked():
         elif state == "down":
             thread_down()
     else:
+        exit_event.set()
         exit_event.clear()
 
 
