@@ -28,7 +28,7 @@ def upChecked():
     while True:
         if exit_event.wait(timeout=0.2):
             exit_event.clear()
-            checkBox.deselect()
+            checked()
             break
         else:
             f_add()
@@ -41,7 +41,7 @@ def downChecked():
     while True:
         if exit_event.wait(timeout=0.2):
             exit_event.clear()
-            checkBox.deselect()
+            checked()
             break
         else:
             f_subtract()
@@ -154,6 +154,8 @@ window.bind("=", f_add)
 window.bind("<space>", doubleClick)
 
 def on_closing():
+    global state
+    state = "neutral"
     exit_event.set()
     window.destroy()
 
