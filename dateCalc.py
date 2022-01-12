@@ -2,6 +2,8 @@ import tkinter
 import datetime
 import calendar
 from tkinter import ttk
+from tkinter.messagebox import showinfo
+from tkinter import messagebox
 
 
 window = tkinter.Tk()
@@ -17,16 +19,25 @@ months.pop(0)
 
 #diffrence calculator
 def calcDays():
-    if Combo.get() == "Pick a month" or day_selected == "Pick a day":
+    try:
+        if Combo.get() == "Pick a month" or day_selected == "Pick a day":
+            pass
+        else:
+            today = datetime.date.today()
+            someday = datetime.date(int(yearEntry.get()), int(months.index(Combo.get()))+1, int(Combo2.get()))
+            diff = someday - today
+            diff = diff.days
+            if diff == 0:
+                output = "That is today"
+            elif diff < 0:
+                diff *= -1
+                output = "{} day(s) ago"
+            else:
+                output = "In {} day(s)"
+            messagebox.showinfo(title='Result',
+                                message=output.format(diff))
+    except:
         pass
-    else:
-        today = datetime.date.today()
-        someday = datetime.date(int(yearEntry.get()), int(months.index(Combo.get())), int(Combo2.get()))
-        diff = someday - today
-        diff = diff.days
-        if diff < 0:
-            diff *= -1
-        print(diff)
 
 list1 = ['January', 'March', 'May', 'July', 'August', 'October', 'December']
 
@@ -76,7 +87,9 @@ def retrieve(event):
     if '' == yearEntry.get():
         year = 0
     else:
-        year == int(yearEntry.get())
+        year = yearEntry.get()
+        year = int(year[0:4])
+        v.set(year)
     leapYear = False
     if year % 400 == 0 or  year % 100 != 0 and year % 4 == 0:
         leapYear = True
