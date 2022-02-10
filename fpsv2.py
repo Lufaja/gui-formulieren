@@ -10,7 +10,7 @@ window.title("FPS Trainer")
 window.geometry("500x350")
 window.config(bg="black")
 def threadprint():
-    # print(threading.active_count())
+    print(threading.active_count())
     pass
 threadprint()
 list = ["Press W", "Press A", "Press D", "Press S", "Press Space", "Single Click", "Double Click", "Triple Click"]
