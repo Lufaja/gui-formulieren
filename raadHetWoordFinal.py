@@ -12,9 +12,9 @@ def screen1():
     window.title("Woordgeuss = speler 1")
     window.geometry("250x150")
     window.resizable(False, False)
-    window.protocol("WM_DELETE_WINDOW", lambda: "")
+    # window.protocol("WM_DELETE_WINDOW", lambda: "")
 
-    def stop():
+    def confirm():
         global woord, lengteWoord, punten
         woord = woordEntry.get()
         if len(woord) > maximum or len(woord) < minimum:
@@ -61,7 +61,7 @@ def screen1():
     )
     
     button1 = tkinter.Button(window,
-        command=stop,
+        command=confirm,
         state="disabled",
         text="Stel woord in",
     )
@@ -82,35 +82,36 @@ def screen2():
     window.resizable(False, False)
 
 
-    alphabet_string = string.ascii_uppercase
-    alphabet_list = list(alphabet_string)
+    alphabet_list = list(string.ascii_uppercase)
     
     def listMaker(number):
         spinList = []
         woordUp = list(woord.upper())
         for x in range(0, lengteWoord):
-            list_ = [woordUp[x]]
-            z = randomAdd(list_)
-            v = random.choice(z)
+            choiceList = [woordUp[x]]
+            choiceList = randomAdd(choiceList)
+            print(choiceList)
+            firstLetter = random.choice(choiceList)
             spinList.append(ttk.Spinbox(window,
-                values = z,
+                values = choiceList,
                 state = "readonly",
                 width=2,
                 wrap=True
                 ))
-            spinList[x].set(v)
+            spinList[x].set(firstLetter)
         for x in range(len(spinList)):
             spinList[x].grid(row=1, column=x)
         return spinList
 
     
     def randomAdd(list):
-        for x in range(listSize-1):
-            choice = list[0]
-            while choice in list:
-                choice = random.choice(alphabet_list)
-            list.append(choice)
+        teller = 0
+        alphabet = alphabet_list.copy()
+        alphabet.remove(list[0])
+        random.shuffle(alphabet)
+        list.extend(alphabet[0:listSize-1])
         random.shuffle(list)
+        print(teller)
         return list
         
 

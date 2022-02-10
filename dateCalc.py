@@ -120,5 +120,3 @@ def retrieve(event):
 Combo.bind("<<ComboboxSelected>>",retrieve)
 yearEntry.bind("<KeyRelease>", retrieve)
 window.mainloop()
-a = v
-print(a)
