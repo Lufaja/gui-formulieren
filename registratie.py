@@ -1,6 +1,7 @@
 import tkinter, re
 from tkinter import messagebox
 from date import datum
+import random
 
 window = tkinter.Tk()
 window.title("Registratie")
@@ -164,10 +165,16 @@ label4 = tkinter.Label(
     text=f"Geboortedatum:\n{birthday}"
 )
 
+label5 = tkinter.Label(
+    window,
+    text= random.randint(1000000,10000000)
+)
+
 label1.pack()
 label2.pack()
 label3.pack()
 label4.pack()
+label5.pack()
 
 
 
